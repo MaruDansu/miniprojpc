@@ -3,14 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ffffff;  /* Ensures the background is white */
+  --foreground: #171717;  /* Keeps text primarily black */
+  --accent-color: #4d754e;  /* A green accent color, adjust as needed */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: rgba(8, 88, 5, 0.551);
     --foreground: #ededed;
+    --accent-color:  rgb(167, 175, 167);  /* Darker green for dark mode if necessary */
   }
 }
 
@@ -18,4 +20,40 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+a {
+  color: var(--accent-color);
+  text-decoration: none;  /* Removes underline from links */
+}
+
+button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: darken(var(--accent-color), 10%); /* Darkens the button on hover */
+}
+.bg-main {
+  background-color: #f0f0f0; /* A light grey background for the main area */
+}
+
+.text-highlight {
+  color: #388e3c; /* A darker green for better contrast */
+}
+
+.card {
+  background-color: #ffffff; /* White background for the cards */
+  border: 1px solid #cccccc; /* Light grey border */
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* More prominent shadow on hover */
 }
