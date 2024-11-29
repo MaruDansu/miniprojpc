@@ -1,6 +1,5 @@
 import React from 'react';
-import Head from 'next/head';
-import CategoryCard from './components/CategoryCard';
+import CategoryCard from './components/CategoryCard'; // Ensure this path matches your project structure
 
 const Home = () => {
   const categories = [
@@ -20,29 +19,35 @@ const Home = () => {
         { id: 4, name: "Yeezy Boost 350", price: 300, condition: "Used", size: 11 },
       ],
     },
+    {
+      id: 3,
+      name: "Souvenirs and Trinkets",
+      items: [
+        { id: 5, name: "Eiffel Tower Miniature", price: 20, condition: "New" },
+        { id: 6, name: "Handmade Wooden Bowl", price: 35, condition: "New" },
+      ],
+    }
   ];
 
   return (
-    <>
-      <Head>
-        <title>Palladium ECO</title>
-      </Head>
-
-      <div className="bg-gray-100 min-h-screen p-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg mb-6">
-            <h1 className="text-xl font-bold text-green-800 mb-2">Welcome to the PALLADIUM ECO!</h1>
-            <p>This sub-store of PALLADIUM is dedicated to showcasing categories of shoes with a focus on a green aesthetic.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {categories.map(category => (
-              <CategoryCard key={category.id} category={category} />
-            ))}
-          </div>
+    <div className="flex flex-col h-screen">
+      <div className="p-4 bg-gray-200">
+        <h1 className="text-3xl font-bold text-gray-800">Welcome to the PALLADIUM ECO!</h1>
+        <p className="text-lg text-gray-700">Explore our latest collections and exclusive offers below.</p>
+      </div>
+      <div className="flex-1 overflow-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+          {categories.filter(category => category.name !== 'Souvenirs and Trinkets').map((category) => (
+            <CategoryCard key={category.id} category={category} />
+          ))}
         </div>
       </div>
-    </>
+      <div className="flex-1 overflow-auto bg-gray-100 p-4">
+        {categories.filter(category => category.name === 'Souvenirs and Trinkets').map((category) => (
+          <CategoryCard key={category.id} category={category} />
+        ))}
+      </div>
+    </div>
   );
 };
 
