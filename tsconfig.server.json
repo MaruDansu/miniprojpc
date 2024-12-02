@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.json",  // Extend from your main tsconfig to reuse settings
+    "compilerOptions": {
+      "module": "commonjs",  // CommonJS is typical for Node.js environments
+      "target": "es2019",    // Or another target appropriate for your Node.js version
+      "noEmit": true,        // Prevents output files during type checking
+      "isolatedModules": false  // Can be set as needed for your project
+    },
+    "include": [
+      "src/**/*"  // Adjust based on your source files location
+    ],
+    "exclude": ["node_modules", ".next", "out"]  // Standard excludes
+  }
+  

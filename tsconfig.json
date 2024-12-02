@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "jsx": "preserve", // or "react-jsx" if you are using React 17 or later
+    "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
