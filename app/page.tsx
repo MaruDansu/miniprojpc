@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "./components/Layout";
 import CategoryCard from "./components/CategoryCard";
+import Link from "next/link"; // Make sure Link is imported
 
 interface PalladiumShoe {
   id: number;
@@ -10,6 +11,8 @@ interface PalladiumShoe {
   price: number;
   condition: string;
   size?: number;
+  imageUrl: string;
+  description: string;
 }
 
 interface Category {
@@ -20,43 +23,108 @@ interface Category {
 
 const Home = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("/api/categories");  // This URL must match the API route path
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
+        // Mock data for now (replace with an API call if necessary)
+        const data: Category[] = [
+          {
+            id: 1,
+            name: "New Arrivals",
+            items: [
+              {
+                id: 1,
+                name: "Palladium 1",
+                price: 200,
+                condition: "New",
+                size: 10,
+                imageUrl: "/images/shoe1.jpg", // Image URL path in public folder
+                description: "Stylish Palladium shoes for everyday wear",
+              },
+              {
+                id: 2,
+                name: "Palladium 2",
+                price: 250,
+                condition: "New",
+                size: 9,
+                imageUrl: "/images/shoe2.png", // Image URL path in public folder
+                description: "Premium Palladium shoes for outdoor adventures",
+              },
+            ],
+          },
+          {
+            id: 2,
+            name: "Used Classics",
+            items: [
+              {
+                id: 3,
+                name: "Palladium 3",
+                price: 180,
+                condition: "Used",
+                size: 8,
+                imageUrl: "/images/shoe3.png", // Image URL path in public folder
+                description: "Classic Palladium shoes in used condition",
+              },
+              {
+                id: 4,
+                name: "Palladium 4",
+                price: 300,
+                condition: "Used",
+                size: 11,
+                imageUrl: "/images/shoe4.png", // Image URL path in public folder
+                description: "Retro Palladium shoes for vintage lovers",
+              },
+            ],
+          },
+          {
+            id: 3,
+            name: "Souvenirs and Trinkets",
+            items: [
+              {
+                id: 5,
+                name: "Miniature Palladium",
+                price: 20,
+                condition: "New",
+                imageUrl: "/images/cat.png", // Image URL path in public folder
+                description: "Collectible Palladium miniature for display",
+              },
+            ],
+          },
+        ];
+
         setCategories(data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching categories:", error);
-        setError("Failed to fetch categories");
-        setLoading(false);
       }
     };
 
     fetchCategories();
   }, []);
 
-  if (loading) {
-    return <p>Loading categories...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-
   return (
     <Layout>
-      {/* Display Categories */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {categories.map((category) => (
-          <CategoryCard key={category.id} category={category} />
+          <div key={category.id}>
+            <h2 className="text-xl font-bold">{category.name}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {category.items.map((item) => (
+                <div key={item.id} className="border rounded-lg p-4">
+                  <img src={item.imageUrl} alt={item.name} className="w-full h-64 object-cover mb-4" />
+                  <h3 className="text-lg font-semibold">{item.name}</h3>
+                  <p className="text-gray-600">${item.price}</p>
+                  <p className="text-sm text-gray-500">{item.condition}</p>
+                  {/* Updated View Product Link */}
+                  <Link href={`/product/${item.id}`}>
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
+                      View Product
+                    </button>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </Layout>

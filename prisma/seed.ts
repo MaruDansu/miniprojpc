@@ -1,49 +1,42 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 async function main() {
   await prisma.category.create({
     data: {
-      name: 'New Arrivals',
+      name: "New Arrivals",
       items: {
         create: [
-          { name: 'Air Jordan 1', price: 200, condition: 'New', size: 10 },
-          { name: 'Air Jordan 4', price: 250, condition: 'New', size: 9 },
+          {
+            name: "Palladium 1",
+            price: 150,
+            condition: "New",
+            size: 10,
+            imageUrl: "https://via.placeholder.com/300",  // Provide a default image URL
+            description: "A stylish Palladium shoe.",
+          },
+          {
+            name: "Palladium 2",
+            price: 160,
+            condition: "New",
+            size: 9,
+            imageUrl: "https://via.placeholder.com/300",
+            description: "Palladium's latest design.",
+          },
+          // Add more shoes as needed
         ],
       },
     },
   });
 
-  await prisma.category.create({
-    data: {
-      name: 'Used Classics',
-      items: {
-        create: [
-          { name: 'Nike Dunk Low', price: 180, condition: 'Used', size: 8 },
-          { name: 'Yeezy Boost 350', price: 300, condition: 'Used', size: 11 },
-        ],
-      },
-    },
-  });
-
-  await prisma.category.create({
-    data: {
-      name: 'Souvenirs and Trinkets',
-      items: {
-        create: [
-          { name: 'Eiffel Tower Miniature', price: 20, condition: 'New' },
-          { name: 'Handmade Wooden Bowl', price: 35, condition: 'New' },
-        ],
-      },
-    },
-  });
-
-  console.log('Database seeded successfully!');
+  // You can add more categories and shoes here as well
 }
 
 main()
-  .catch((e) => console.error(e))
+  .catch((e) => {
+    console.error(e);
+  })
   .finally(async () => {
     await prisma.$disconnect();
   });

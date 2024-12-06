@@ -14,11 +14,13 @@ model Category {
 }
 
 model PalladiumShoe {
-  id         Int      @id @default(autoincrement())
-  name       String
-  price      Float
-  condition  String
-  size       Int?
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int
+  id          Int     @id @default(autoincrement())
+  name        String
+  price       Float
+  condition   String
+  size        Int?
+  imageUrl    String  // Add the imageUrl field
+  description String?
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
 }
