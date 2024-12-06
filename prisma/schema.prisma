@@ -1,5 +1,3 @@
-
-
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
@@ -10,29 +8,17 @@ generator client {
 }
 
 model Category {
-  id    Int      @id @default(autoincrement())
+  id    Int            @id @default(autoincrement())
   name  String
-  items Sneaker[]
+  items PalladiumShoe[]
 }
 
-model Sneaker {
-  id        Int     @id @default(autoincrement())
-  name      String
-  price     Float
-  condition String
-  size      Int?
-  category  Category @relation(fields: [categoryId], references: [id])
+model PalladiumShoe {
+  id         Int      @id @default(autoincrement())
+  name       String
+  price      Float
+  condition  String
+  size       Int?
+  category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
-}
-
-model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
-  role     String @default("USER")
-}
-
-enum Role {
-  USER
-  ADMIN
 }

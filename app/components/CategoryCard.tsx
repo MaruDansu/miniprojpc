@@ -1,31 +1,34 @@
-import React from 'react';
+import React from "react";
 
-interface Sneaker {
+// Define the PalladiumShoe and Category interfaces
+interface PalladiumShoe {
   id: number;
   name: string;
   price: number;
   condition: string;
-  size?: number; 
+  size?: number;
 }
 
 interface Category {
   id: number;
   name: string;
-  items: Sneaker[];
+  items: PalladiumShoe[];
 }
 
 const CategoryCard: React.FC<{ category: Category }> = ({ category }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-5 m-3">
-      <h2 className="text-xl font-bold text-gray-800 mb-3">{category.name}</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div className="border rounded-lg p-4 shadow-sm">
+      <h2 className="text-xl font-bold mb-3">{category.name}</h2>
+      <ul>
         {category.items.map((item) => (
-          <div key={item.id} className="p-3 hover:bg-gray-100 rounded-md">
-            <h3 className="text-lg text-gray-800 font-semibold">{item.name}</h3>
-            <p className="text-gray-600">${item.price} - Size {item.size} - {item.condition}</p>
-          </div>
+          <li key={item.id} className="mb-2">
+            <h3 className="text-lg font-semibold">{item.name}</h3>
+            <p>Price: ${item.price}</p>
+            <p>Condition: {item.condition}</p>
+            {item.size && <p>Size: {item.size}</p>}
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

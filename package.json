@@ -3,9 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "ts-node --project tsconfig.server.json node_modules/.bin/next dev",
-    "build": "ts-node --project tsconfig.server.json node_modules/.bin/next build",
-    "start": "ts-node --project tsconfig.server.json node_modules/.bin/next start"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "prisma:seed": "ts-node --project tsconfig.server.json prisma/seed.ts"
+  },
+  "prisma": {
+    "seed": "ts-node --project tsconfig.server.json prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.0.0",

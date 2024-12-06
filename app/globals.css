@@ -16,6 +16,9 @@
   }
 }
 
+* {
+  color:#171717;
+}
 body {
   color: var(--foreground);
   background: var(--background);
