@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./components/Layout";
 import CategoryCard from "./components/CategoryCard";
-import Link from "next/link"; // Make sure Link is imported
+import Link from "next/link";
 
 interface PalladiumShoe {
   id: number;
@@ -27,7 +27,6 @@ const Home = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        // Mock data for now (replace with an API call if necessary)
         const data: Category[] = [
           {
             id: 1,
@@ -39,7 +38,7 @@ const Home = () => {
                 price: 200,
                 condition: "New",
                 size: 10,
-                imageUrl: "/images/shoe1.jpg", // Image URL path in public folder
+                imageUrl: "/images/shoe1.jpg", 
                 description: "Stylish Palladium shoes for everyday wear",
               },
               {
@@ -48,7 +47,7 @@ const Home = () => {
                 price: 250,
                 condition: "New",
                 size: 9,
-                imageUrl: "/images/shoe2.png", // Image URL path in public folder
+                imageUrl: "/images/shoe2.png",
                 description: "Premium Palladium shoes for outdoor adventures",
               },
             ],
@@ -63,7 +62,7 @@ const Home = () => {
                 price: 180,
                 condition: "Used",
                 size: 8,
-                imageUrl: "/images/shoe3.png", // Image URL path in public folder
+                imageUrl: "/images/shoe3.png",
                 description: "Classic Palladium shoes in used condition",
               },
               {
@@ -72,7 +71,7 @@ const Home = () => {
                 price: 300,
                 condition: "Used",
                 size: 11,
-                imageUrl: "/images/shoe4.png", // Image URL path in public folder
+                imageUrl: "/images/shoe4.png",
                 description: "Retro Palladium shoes for vintage lovers",
               },
             ],
@@ -86,7 +85,7 @@ const Home = () => {
                 name: "Miniature Palladium",
                 price: 20,
                 condition: "New",
-                imageUrl: "/images/cat.png", // Image URL path in public folder
+                imageUrl: "/images/cat.png",
                 description: "Collectible Palladium miniature for display",
               },
             ],
@@ -115,7 +114,6 @@ const Home = () => {
                   <h3 className="text-lg font-semibold">{item.name}</h3>
                   <p className="text-gray-600">${item.price}</p>
                   <p className="text-sm text-gray-500">{item.condition}</p>
-                  {/* Updated View Product Link */}
                   <Link href={`/product/${item.id}`}>
                     <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
                       View Product

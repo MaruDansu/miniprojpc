@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router"; // For dynamic routing
-import Layout from "../../components/Layout"; // Adjust path if necessary
+import Layout from "../../components/Layout"; // Path to Layout component
 
 interface PalladiumShoe {
   id: number;
@@ -16,14 +16,14 @@ interface PalladiumShoe {
 
 const ProductDetails = () => {
   const router = useRouter();
-  const { id } = router.query;  // Use the id from the URL
+  const { id } = router.query;  // Get the dynamic 'id' from the URL
   const [product, setProduct] = useState<PalladiumShoe | null>(null);
 
   useEffect(() => {
     if (id) {
       const fetchProduct = async () => {
         try {
-          // Mock data - you can replace this with an actual API call to fetch product by ID
+          // Mock data - replace with actual API call to fetch product by ID
           const products = [
             {
               id: 1,
@@ -41,7 +41,7 @@ const ProductDetails = () => {
               imageUrl: "/images/shoe2.png",
               description: "Premium Palladium shoes for outdoor adventures",
             },
-            // Add more products here
+            // Add more products here...
           ];
 
           const product = products.find((prod) => prod.id === parseInt(id as string));
