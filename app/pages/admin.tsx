@@ -21,7 +21,7 @@ const Admin = () => {
 
   return (
     <div>
-      {user ? <h1>Welcome Admin {user.username}</h1> : <p>Loading...</p>}
+      {user ? <h1>Welcome Admin </h1> : <p>Loading...</p>}
     </div>
   );
 };

@@ -1,86 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --accent-color: #4d754e;
+}
 
-@font-face {
-    font-family: 'GeistMono';
-    src: url('/fonts/GeistMonoVF.woff') format('woff');
-    font-weight: 100 900;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: rgba(8, 88, 5, 0.551);
+    --foreground: #ededed;
+    --accent-color: rgb(167, 175, 167);
   }
-  
-  body {
-    font-family: 'GeistMono', sans-serif;
-  }
-/* Styling for the thumbnail image on product cards */
-.product-img {
-  width: 100%;
-  height: auto;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
 }
 
-.product-img:hover {
-  transform: scale(1.1);
+* {
+  color: #171717;
 }
 
-/* Modal overlay styling */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Modal content box */
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  position: relative;
+a {
+  color: var(--accent-color);
+  text-decoration: none;
 }
 
-/* Modal image styling */
-.modal-image {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-}
-
-/* Close modal button */
-.close-modal {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: red;
+button {
+  background-color: var(--accent-color);
   color: white;
-  padding: 10px;
   border: none;
-  border-radius: 50%;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
 }
-/* Styling for the modal and product cards */
-.product-card {
-  width: 100%;
-  max-width: 320px;
-  margin: auto;
+
+button:hover {
+ 
+  background-color: #3e5e40; 
 }
 
-.product-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+.bg-main {
+  background-color: #f0f0f0;
 }
 
-.product-card button {
-  width: 100%;
+.text-highlight {
+  color: #388e3c;
 }
 
-.product-detail-img {
-  max-width: 600px;
-  width: 100%;
-  object-fit: contain;
+.card {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }

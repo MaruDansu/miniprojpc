@@ -1,3 +1,5 @@
+// prisma/schema.prisma
+
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
@@ -8,26 +10,28 @@ generator client {
 }
 
 model Category {
-  id    Int      @id @default(autoincrement())
+  id    Int              @id @default(autoincrement())
   name  String
   items PalladiumShoe[]
 }
 
 model PalladiumShoe {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   price       Float
   condition   String
   size        Int?
-  description String
   imageUrl    String
+  description String
   categoryId  Int
-  category    Category @relation(fields: [categoryId], references: [id])
+  category    Category  @relation(fields: [categoryId], references: [id])
 }
+
 
 model User {
   id       Int      @id @default(autoincrement())
   username String   @unique
   password String
-  role     String   @default("user") // 'user' or 'admin'
+  role     String   @default("user")
 }
+

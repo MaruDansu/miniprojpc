@@ -1,41 +1,88 @@
-import { PrismaClient } from "@prisma/client";
+// prisma/seed.ts
 
-const prisma = new PrismaClient();
+import prisma from '../lib/prisma';
+import bcrypt from 'bcryptjs';
 
 async function main() {
-  await prisma.category.create({
-    data: {
-      name: "New Arrivals",
-      items: {
-        create: [
-          {
-            name: "Palladium 1",
-            price: 150,
-            condition: "New",
-            size: 10,
-            imageUrl: "https://via.placeholder.com/300",  // Provide a default image URL
-            description: "A stylish Palladium shoe.",
-          },
-          {
-            name: "Palladium 2",
-            price: 160,
-            condition: "New",
-            size: 9,
-            imageUrl: "https://via.placeholder.com/300",
-            description: "Palladium's latest design.",
-          },
-          // Add more shoes as needed
-        ],
-      },
-    },
+  // Create Categories
+  const newArrivals = await prisma.category.create({
+    data: { name: 'New Arrivals' },
   });
 
-  // You can add more categories and shoes here as well
+  const usedClassics = await prisma.category.create({
+    data: { name: 'Used Classics' },
+  });
+
+  const souvenirs = await prisma.category.create({
+    data: { name: 'Souvenirs and Trinkets' },
+  });
+
+  // Create PalladiumShoes
+  await prisma.palladiumShoe.createMany({
+    data: [
+      {
+        name: 'Palladium 1',
+        price: 200,
+        condition: 'New',
+        size: 10,
+        description: 'Stylish Palladium shoes for everyday wear',
+        imageUrl: '/images/shoe1.jpg',
+        categoryId: newArrivals.id,
+      },
+      {
+        name: 'Palladium 2',
+        price: 250,
+        condition: 'New',
+        size: 9,
+        description: 'Premium Palladium shoes for outdoor adventures',
+        imageUrl: '/images/shoe2.png',
+        categoryId: newArrivals.id,
+      },
+      {
+        name: 'Palladium 3',
+        price: 180,
+        condition: 'Used',
+        size: 8,
+        description: 'Classic Palladium shoes in used condition',
+        imageUrl: '/images/shoe3.png',
+        categoryId: usedClassics.id,
+      },
+      {
+        name: 'Palladium 4',
+        price: 300,
+        condition: 'Used',
+        size: 11,
+        description: 'Retro Palladium shoes for vintage lovers',
+        imageUrl: '/images/shoe4.png',
+        categoryId: usedClassics.id,
+      },
+      {
+        name: 'Miniature Palladium',
+        price: 20,
+        condition: 'New',
+        description: 'Collectible Palladium miniature for display',
+        imageUrl: '/images/cat.png',
+        categoryId: souvenirs.id,
+      },
+    ],
+  });
+
+  // Create an Admin User
+  const hashedPassword = await bcrypt.hash('adminpassword', 10);
+
+  await prisma.user.create({
+    data: {
+      username: 'admin',
+      password: hashedPassword,
+      role: 'admin',
+    },
+  });
 }
 
 main()
   .catch((e) => {
     console.error(e);
+    process.exit(1);
   })
   .finally(async () => {
     await prisma.$disconnect();
